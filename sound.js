@@ -3,16 +3,19 @@ function onDOMLoad() {
   let audioURL = "https://raw.githubusercontent.com/travisbartholome/music-slowly/master/samples/ferling-10.ogg";
   let play = document.getElementById("play");
   let audioContext = new AudioContext();
-  let sample;
+  let sampleBuffer;
   function playBuffer(buffer) {
+    sampleBuffer = buffer;
     let player = audioContext.createBufferSource();
     player.buffer = buffer;
     player.connect(audioContext.destination);
-    player.start(audioContext.currentTime + 0.5);
+    let startTime = audioContext.currentTime + 0.5; // Is the 0.5s delay necessary?
+    player.start(startTime);
+    player.stop(startTime + 8); // Arbitrary duration
   }
   play.addEventListener("click", function() {
-    if (sample) {
-      playBuffer(sample);
+    if (sampleBuffer) {
+      playBuffer(sampleBuffer);
     } else {
       let request = new XMLHttpRequest();
       request.onload = function() {
