@@ -1,5 +1,7 @@
 /* This is just temporary */
-#play {
+button {
+  display: block;
   font-size: 36px;
+  margin: 10px;
   padding: 1em 2em;
 }

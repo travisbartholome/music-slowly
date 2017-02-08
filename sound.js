@@ -4,6 +4,7 @@ function onDOMLoad() {
   let play = document.getElementById("play");
   let audioContext = new AudioContext();
   let sampleBuffer;
+
   function playBuffer(buffer) {
     sampleBuffer = buffer;
     let player = audioContext.createBufferSource();
@@ -13,7 +14,8 @@ function onDOMLoad() {
     player.start(startTime);
     player.stop(startTime + 8); // Arbitrary duration
   }
-  play.addEventListener("click", function() {
+
+  function getAudio() {
     if (sampleBuffer) {
       playBuffer(sampleBuffer);
     } else {
@@ -25,5 +27,7 @@ function onDOMLoad() {
       request.open("GET", audioURL);
       request.send();
     }
-  });
+  }
+  play.addEventListener("click", getAudio);
+  halfSpeed.addEventListener("click", getAudio);
 }
