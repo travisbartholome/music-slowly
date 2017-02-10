@@ -1,0 +1,26 @@
+{
+  "name": "music-slowly",
+  "version": "0.0.1",
+  "description": "Plays back music at a different tempo with the same pitch.",
+  "main": "sound.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/travisbartholome/music-slowly.git"
+  },
+  "keywords": [
+    "music",
+    "transpose",
+    "web-audio",
+    "web-audio-api",
+    "transcription"
+  ],
+  "author": "Travis Bartholome",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/travisbartholome/music-slowly/issues"
+  },
+  "homepage": "https://github.com/travisbartholome/music-slowly#readme"
+}
