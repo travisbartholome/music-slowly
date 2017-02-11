@@ -5,10 +5,21 @@ function onDOMLoad() {
   let audioContext = new AudioContext();
   let sampleBuffer;
 
+  function transformAudio(source, nextNode, playbackRate) {
+    let analyser = audioContext.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(nextNode);
+    analyser.fftSize = Math.pow(2,14); // TODO: Not sure what size I want here. Probably should be dynamic.
+    let dataArray = new Uint8Array(analyser.fftSize);
+    analyser.getByteFrequencyData(dataArray);
+    console.log(dataArray);
+  }
+
   function playBuffer(playbackRate) {
     return function(buffer) {
-      sampleBuffer = buffer;
       let player = audioContext.createBufferSource();
+      transformAudio(player, audioContext.destination, playbackRate);
+      sampleBuffer = buffer;
       player.buffer = buffer;
       player.playbackRate.value = playbackRate;
       //player.detune.value = 2400 * (1 - playbackRate); // HACK HACK HACK HACK for only 1/2 speed
