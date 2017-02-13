@@ -18,12 +18,11 @@ function onDOMLoad() {
   function playBuffer(playbackRate) {
     return function(buffer) {
       let player = audioContext.createBufferSource();
-      transformAudio(player, audioContext.destination, playbackRate);
       sampleBuffer = buffer;
       player.buffer = buffer;
       player.playbackRate.value = playbackRate;
-      //player.detune.value = 2400 * (1 - playbackRate); // HACK HACK HACK HACK for only 1/2 speed
-      player.connect(audioContext.destination);
+      transformAudio(player, audioContext.destination, playbackRate);
+      // TODO: Add a callback to transformAudio that contains the lines below?
       let startTime = audioContext.currentTime + 0.5; // Is the 0.5s delay necessary?
       player.start(startTime);
       player.stop(startTime + 8); // Arbitrary duration
